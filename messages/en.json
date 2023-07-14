@@ -1,0 +1,13 @@
+{
+  "GetStarted": {
+    "title": "Select what is this device for"
+  },
+  "DeviceCards": {
+    "player": "To play videos",
+    "controller": "To manage the videos"
+  },
+  "SignInTv": {
+    "title": "Use your mobile device to scan the QR code and sign in to the TV",
+    "subtitle": "Or go to {url} and enter the code {code}"
+  }
+}
