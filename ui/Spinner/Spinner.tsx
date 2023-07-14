@@ -1,10 +1,26 @@
-export default function Spinner() {
+const sizes = {
+  xs: "w-4 h-4",
+  sm: "w-6 h-6",
+  md: "w-8 h-8",
+  lg: "w-12 h-12",
+  xl: "w-16 h-16",
+  "2xl": "w-20 h-20",
+  "3xl": "w-24 h-24",
+  "4xl": "w-32 h-32",
+  "5xl": "w-40 h-40",
+};
+
+export default function Spinner({
+  size = "sm",
+}: {
+  size?: keyof typeof sizes;
+}) {
   return (
     <div className="text-center">
       <div role="status">
         <svg
           aria-hidden="true"
-          className="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+          className={`inline text-gray-200 animate-spin dark:text-gray-600 fill-blue-600 ${sizes[size]}`}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

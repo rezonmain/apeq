@@ -8,7 +8,9 @@
   },
   "SignInTv": {
     "title": "Use your mobile device to scan the QR code and sign in to the TV",
-    "subtitle": "Or go to <code>{url}</code> and enter the code <code>{token}</code>",
+    "subtitle": "Or go to <code>{url}</code> and enter the code <code>{token}</code>"
+  },
+  "GoBackButton": {
     "button": "Go back"
   }
 }

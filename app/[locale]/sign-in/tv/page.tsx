@@ -1,8 +1,8 @@
 import { QRChallenge } from "@/services/QRChallenge";
 import { Button } from "@/ui/Button/Button";
 import Code from "@/ui/Code/Code";
+import GoBackButton from "@/ui/components/GoBackButton/GoBackButton";
 import { useTranslations } from "next-intl";
-import Link from "next-intl/link";
 import { QRCodeSVG } from "qrcode.react";
 
 export default function SignInTv() {
@@ -20,11 +20,7 @@ export default function SignInTv() {
             code: (chunks) => <Code>{chunks}</Code>,
           })}
         </p>
-        <Link href="/get-started">
-          <Button className="mt-5" variant="primary-outline">
-            {t("button")}
-          </Button>
-        </Link>
+        <GoBackButton href="/get-started" />
       </div>
       <div className="p-4 bg-white rounded-lg">
         <QRCodeSVG value={logInCallback} size={240} />

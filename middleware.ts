@@ -13,6 +13,8 @@ export default authMiddleware({
 
   publicRoutes: [
     "/",
+    "/sign-in/:type",
+    "/get-started",
     "/:locale",
     "/:locale/sign-in/:type",
     "/:locale/get-started",
