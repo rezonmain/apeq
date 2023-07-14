@@ -2,9 +2,19 @@ import { init } from "@paralleldrive/cuid2";
 
 export class QRChallenge {
   private generateToken: () => string;
-  constructor() {
+  private _token: string;
+  constructor(tokenLength?: number) {
     this.generateToken = init({
-      length: 25,
+      length: tokenLength ?? 25,
     });
+    this._token = this.generateToken();
+  }
+
+  get token(): string {
+    return this._token;
+  }
+
+  resetToken(): void {
+    this._token = this.generateToken();
   }
 }
