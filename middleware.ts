@@ -19,6 +19,8 @@ export default authMiddleware({
     "/:locale/sign-in/:type",
     "/:locale/get-started",
   ],
+
+  ignoredRoutes: ["/(api|trpc)(.*)"],
 });
 
 export const config = {
