@@ -4,14 +4,17 @@ import Pusher from "pusher-js";
 import type { Channel } from "pusher-js";
 import { useEffect, useRef } from "react";
 
+type SubCallbacks = {
+  e: PubSubEvents;
+  cb: (data: string) => void;
+};
 interface usePubSubProps {
   token: string;
+  sub?: SubCallbacks[];
 }
 
-const usePubSub = ({ token }: usePubSubProps) => {
+const usePubSub = ({ token, sub }: usePubSubProps) => {
   const channelRef = useRef<Channel>();
-
-  console.log(channelRef);
 
   useEffect(() => {
     const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY ?? "", {
@@ -22,10 +25,15 @@ const usePubSub = ({ token }: usePubSubProps) => {
         transport: "ajax",
       },
     });
+
     const channel = pusher.subscribe(`private-${token}`);
+    if (sub) {
+      sub.forEach(({ e, cb }) => channel.bind(e, cb));
+    }
     channelRef.current = channel;
     return () => pusher.unsubscribe(`private-${token}`);
-  }, [token]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, JSON.stringify(sub)]);
 
   const pub: Record<PubSubEvents, (data: string) => void> = {
     [PubSubEvents.SuccessfulAuth]: (data: string) =>
@@ -34,14 +42,7 @@ const usePubSub = ({ token }: usePubSubProps) => {
       channelRef.current?.trigger(PubSubEvents.Test, data),
   };
 
-  const sub: Record<PubSubEvents, (cb: (data: string) => void) => void> = {
-    [PubSubEvents.SuccessfulAuth]: (cb) =>
-      channelRef.current?.bind(PubSubEvents.SuccessfulAuth, cb),
-    [PubSubEvents.Test]: (cb) =>
-      channelRef.current?.bind(PubSubEvents.Test, cb),
-  };
-
-  return { pub, sub };
+  return { pub };
 };
 
 export { usePubSub };
