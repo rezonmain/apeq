@@ -17,20 +17,20 @@ const initUseQRAuthState: useQRAuthState = {
   user: "",
 };
 
-const useQRAuth = ({ token }: useQRAuthProps) => {
+const useQRSub = ({ token }: useQRAuthProps) => {
   const [state, dispatch] = useReducer(QRStateReducer, initUseQRAuthState);
 
   useEffect(() => {
     const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY ?? "", {
       cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER ?? "us3",
     });
-    const channel = pusher.subscribe(token);
+    const channel = pusher.subscribe(`client-private-${token}`);
     channel.bind("successful-auth", (data: string) => {
       console.log(data);
       dispatch({ type: "isAuthenticated", value: true });
     });
 
-    return () => pusher.unsubscribe(token);
+    return () => pusher.unsubscribe(`client-private-${token}`);
   }, [token]);
 
   return state;
@@ -56,4 +56,4 @@ const QRStateReducer = (
   }
 };
 
-export { useQRAuth };
+export { useQRSub };
