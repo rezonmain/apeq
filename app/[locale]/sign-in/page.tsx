@@ -1,15 +1,17 @@
+import ClientSignIn from "@/components/ClientSignIn/ClientSignIn";
 import GoBackButton from "@/components/GoBackButton/GoBackButton";
-import { SignIn } from "@clerk/nextjs";
 
-export default function SignInPage() {
+export default function SignInPage({
+  searchParams,
+}: {
+  searchParams: { t: string };
+}) {
   return (
     <article className="w-full h-screen flex flex-col justify-center items-center">
       <div>
         <GoBackButton href="/get-started" />
       </div>
-      <div>
-        <SignIn />
-      </div>
+      <ClientSignIn t={searchParams.t} />
     </article>
   );
 }
