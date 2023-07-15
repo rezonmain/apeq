@@ -17,6 +17,10 @@ const usePubSub = ({ token }: usePubSubProps) => {
     const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY ?? "", {
       cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER ?? "us3",
       forceTLS: true,
+      channelAuthorization: {
+        endpoint: "/api/pusher/auth",
+        transport: "ajax",
+      },
     });
     const channel = pusher.subscribe(`private-${token}`);
     channelRef.current = channel;
