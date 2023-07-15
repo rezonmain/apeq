@@ -1,4 +1,4 @@
 export enum PubSubEvents {
-  SuccessfulAuth = "clint-successful-auth",
+  SuccessfulAuth = "client-successful-auth",
   Test = "client-test",
 }
