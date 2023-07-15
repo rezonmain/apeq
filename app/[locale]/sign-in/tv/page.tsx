@@ -1,13 +1,12 @@
 import { QRChallenge } from "@/services/QRChallenge";
-import { Button } from "@/ui/Button/Button";
-import Code from "@/ui/Code/Code";
-import GoBackButton from "@/ui/components/GoBackButton/GoBackButton";
+import Code from "@/components/ui/Code/Code";
 import { useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
+import GoBackButton from "@/components/GoBackButton/GoBackButton";
 
 export default function SignInTv() {
   const t = useTranslations("SignInTv");
-  const qr = new QRChallenge(5);
+  const qr = new QRChallenge(6);
   const logInCallback = `${process.env.HOST}/sign-in?c=${qr.token}`;
   return (
     <div className="w-full h-screen flex flex-wrap justify-center items-center gap-8">

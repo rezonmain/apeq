@@ -1,4 +1,4 @@
-import DeviceCards from "@/ui/components/DeviceCards/DeviceCards";
+import DeviceCards from "@/components/DeviceCards/DeviceCards";
 import { useTranslations } from "next-intl";
 
 export default function GetStartedPage() {

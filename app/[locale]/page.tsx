@@ -1,5 +1,5 @@
 "use client";
-import PageLoad from "@/ui/components/PageLoad/PageLoad";
+import PageLoad from "@/components/PageLoad/PageLoad";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next-intl/client";
 import { useEffect } from "react";

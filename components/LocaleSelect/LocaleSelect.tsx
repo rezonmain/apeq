@@ -1,5 +1,5 @@
 import { getAvailableLocales } from "@/i18n";
-import Select from "@/ui/Select/Select";
+import Select from "@/components/ui/Select/Select";
 import { useLocale } from "next-intl";
 
 export default async function LocaleSelect() {

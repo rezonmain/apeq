@@ -1,4 +1,4 @@
-import GoBackButton from "@/ui/components/GoBackButton/GoBackButton";
+import GoBackButton from "@/components/GoBackButton/GoBackButton";
 import { SignIn } from "@clerk/nextjs";
 
 export default function SignInPage() {
