@@ -25,9 +25,11 @@ export default function SignInTv() {
           })}
         </p>
         <GoBackButton href="/get-started" />
-        <Link href={signInUrl} target="_blank" rel="noreferrer noopener">
-          Clickable
-        </Link>
+        {process.env.NODE_ENV === "development" && (
+          <Link href={signInUrl} target="_blank" rel="noreferrer noopener">
+            Clickable
+          </Link>
+        )}
       </div>
       <div className="p-4 bg-white rounded-lg">
         <QRCodeSVG value={signInUrl} size={240} />

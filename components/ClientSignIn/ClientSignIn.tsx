@@ -25,12 +25,12 @@ export default function ClientSignIn({ t }: { t: string | undefined }) {
 
   return (
     <>
-      <div className="flex flex-row ">
-        {!isLoaded && <SignInSkeleton />}
-        {!isSignedIn && (
-          <SignIn afterSignInUrl={t ? `/transport-session?t=${t}` : "/"} />
-        )}
-      </div>
+      {!isLoaded && <SignInSkeleton />}
+      {!isSignedIn && (
+        <SignIn
+          afterSignInUrl={t ? `/transport-session?t=${t}` : "/?auth=true"}
+        />
+      )}
     </>
   );
 }
