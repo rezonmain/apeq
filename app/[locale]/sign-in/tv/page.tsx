@@ -32,7 +32,7 @@ export default function SignInTv() {
       <div className="p-4 bg-white rounded-lg">
         <QRCodeSVG value={signInUrl} size={240} />
       </div>
-      <QRWebsocket sub token={qr.token} />
+      <QRWebsocket sub channel={qr.token} />
     </div>
   );
 }

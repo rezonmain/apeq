@@ -2,20 +2,21 @@
 import { Button } from "@/components/ui/Button";
 import { usePubSub } from "@/hooks/usePubSub";
 import { PubSubEvents } from "@/pubsub";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type QRWebsocketProps = {
-  token: string;
+  channel: string;
 };
 type Conditional = { pub?: true; sub?: never } | { pub?: never; sub?: true };
 type Props = QRWebsocketProps & Conditional;
 
-export default function QRWebsocket({ token, pub }: Props) {
-  return pub ? <Pub token={token} /> : <Sub token={token} />;
+export default function QRWebsocket({ channel, pub }: Props) {
+  return pub ? <Pub channel={channel} /> : <Sub channel={channel} />;
 }
 
-const Pub = ({ token }: { token: string }) => {
-  const { pub } = usePubSub({ token });
+const Pub = ({ channel }: { channel: string }) => {
+  const { pub } = usePubSub({ channel });
   return (
     <Button
       variant="primary-outline"
@@ -26,11 +27,18 @@ const Pub = ({ token }: { token: string }) => {
   );
 };
 
-const Sub = ({ token }: { token: string }) => {
+const Sub = ({ channel }: { channel: string }) => {
+  const router = useRouter();
   const [clientTest, setClientTest] = useState("");
   usePubSub({
-    token,
-    sub: [{ e: PubSubEvents.Test, cb: setClientTest }],
+    channel,
+    sub: [
+      { e: PubSubEvents.Test, cb: setClientTest },
+      {
+        e: PubSubEvents.SuccessfulAuth,
+        cb: setClientTest,
+      },
+    ],
   });
   return <span>Client says: {clientTest}</span>;
 };
