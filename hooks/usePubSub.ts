@@ -9,11 +9,11 @@ type SubCallbacks = {
   cb: (data: string) => void;
 };
 interface usePubSubProps {
-  token: string;
+  channel: string;
   sub?: SubCallbacks[];
 }
 
-const usePubSub = ({ token, sub }: usePubSubProps) => {
+const usePubSub = ({ channel: token, sub }: usePubSubProps) => {
   const channelRef = useRef<Channel>();
 
   useEffect(() => {
