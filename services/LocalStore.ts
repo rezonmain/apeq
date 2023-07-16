@@ -8,7 +8,7 @@ class LocalStore implements AppLocalStore {
 
   private getIt(key: keyof AppLocalStore) {
     if (this.store.has(key)) return this.store.get(key);
-    const v = localStorage.getItem("deviceIs");
+    const v = localStorage.getItem(key);
     if (v) {
       this.store.set(key, JSON.parse(v).v);
     }
