@@ -1,3 +1,5 @@
+import { randomBytes } from "crypto";
+
 /**
  * Returns true for empty values, check .spec for details.
  * @param value
@@ -25,4 +27,14 @@ const isNothing = (value: unknown): boolean => {
   return false;
 };
 
-export { isNothing };
+const gid = (length = 100) => {
+  if (typeof window !== "undefined") {
+    return Array.from(
+      window.crypto.getRandomValues(new Uint8Array(length / 2)),
+      (n) => n.toString(16).padStart(2, "0")
+    ).join("");
+  }
+  return randomBytes(length).toString("hex");
+};
+
+export { isNothing, gid };
