@@ -1,13 +1,11 @@
-export default function PlayPage() {
-  return (
-    <iframe
-      width="560"
-      height="315"
-      src="https://www.youtube.com/embed/xggedj1wzyA"
-      title="YouTube video player"
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowFullScreen
-    ></iframe>
-  );
+import Youtube from "@/components/Youtube/Youtube";
+
+export default async function PlayPage({
+  searchParams: p,
+}: {
+  searchParams: { uid: string };
+}) {
+  const activeList = "PL3ZQ5CpNulQmRw6pWc5Yx8XVt0kmi5BQ-";
+
+  return <Youtube webSocketChannel={p.uid} activeList={activeList} />;
 }
