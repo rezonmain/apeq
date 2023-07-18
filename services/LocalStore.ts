@@ -22,8 +22,7 @@ class LocalStore implements AppLocalStore {
   }
 
   get deviceIs() {
-    const key = "deviceIs";
-    return this.getIt(key);
+    return this.getIt("deviceIs");
   }
 
   set deviceIs(value: Required<AppLocalStore["deviceIs"]>) {
@@ -31,8 +30,7 @@ class LocalStore implements AppLocalStore {
   }
 
   get uid() {
-    const key = "uid";
-    return this.getIt(key);
+    return this.getIt("uid");
   }
 
   set uid(value: Required<AppLocalStore["uid"]>) {
