@@ -4,7 +4,7 @@ import Pusher from "pusher-js";
 import type { Channel } from "pusher-js";
 import { useEffect, useRef, useState } from "react";
 
-type SubCallbacks = {
+export type SubCallbacks = {
   e: PubSubEvents;
   cb: (data: string) => void;
 };
@@ -13,7 +13,7 @@ type PubFns = Record<PubSubEvents, (data: string) => void>;
 
 interface usePubSubProps {
   channel: string;
-  sub?: SubCallbacks[];
+  sub?: SubCallbacks[] | (() => SubCallbacks[]);
 }
 
 const usePubSub = ({ channel: token, sub }: usePubSubProps) => {
@@ -40,7 +40,9 @@ const usePubSub = ({ channel: token, sub }: usePubSubProps) => {
 
     const channel = pusher.subscribe(`private-${token}`);
     if (sub) {
-      sub.forEach(({ e, cb }) => channel.bind(e, cb));
+      typeof sub === "object"
+        ? sub.forEach(({ e, cb }) => channel.bind(e, cb))
+        : sub().forEach(({ e, cb }) => channel.bind(e, cb));
     }
     channelRef.current = channel;
     return () => pusher.unsubscribe(`private-${token}`);
